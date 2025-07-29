@@ -1,10 +1,17 @@
 package main.java.com.integrador.modelo;
-
+@Entity
 public class Pelicula {
+    @Column(name = "titulo")
     private String titulo;
+    @Column(name = "director")
     private String director;
-    private int duracion; // Duración en minutos
+    @Column(name = "duracion")
+    private int duracion; //minutos
+    @Column(name = "genero")
     private Boolean genero;
+    
+    @ManyToOne
+    @joinColumn(name = "id_Evento", nullable = false)
 
     // Constructor vacío
     public Pelicula() {

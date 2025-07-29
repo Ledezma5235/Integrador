@@ -1,8 +1,10 @@
 package main.java.com.integrador.modelo;
 
+import java.time.LocalDate;
+
 public class Curador extends Persona {
-    public Curador(String nombre, int edad) {
-        super(nombre, edad);
+    public Curador(int dni,String nombre, LocalDate fechaNac, int telefono, String correoElectronico) {
+        super(dni, nombre, fechaNac, telefono, correoElectronico);
     }
 
     public void curarEvento(String evento) {

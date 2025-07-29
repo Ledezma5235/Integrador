@@ -1,15 +1,18 @@
 package main.java.com.integrador.modelo;
+import com.integrador.modelo.Persona;
+import java.time.LocalDate;
+import javax.persistence.*;
 
+@Entity
 public class Artista extends Persona {
-    public Artista(String nombre, int edad) {
-        super(nombre, edad);
+@ManyToOne
+@JoinColumn(name = "artistas", nullable = false)
+    private Concierto concierto;
+    public Artista() {
+        super();
+    }
+    public Artista(int dni,String nombre, LocalDate fechaNac, int telefono, String correoElectronico) {
+        super(dni, nombre, fechaNac, telefono, correoElectronico);
     }
 
-    public void crearObra() {
-        System.out.println("El artista " + getNombre() + " está creando una obra.");
-    }
-
-    public void exhibirObra() {
-        System.out.println("El artista " + getNombre() + " está exhibiendo su obra.");
-    }
 }

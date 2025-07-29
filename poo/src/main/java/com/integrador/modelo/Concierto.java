@@ -1,24 +1,28 @@
 package main.java.com.integrador.modelo;
 import java.util.List;
 import main.java.com.integrador.modelo.Evento;
+@Entity
 public class Concierto extends Evento{
-
+    @Column(name = "concierto")
     public enum TipoEntrada {
         GRATUITO,
         PAGA
     }
-
+    @Column(name = "tipo_entrada")
     private TipoEntrada tipoEntrada;
-    private List<String> artistas;
-    private List<String> bandas;
+    @OneToMany(mappedBy = "concierto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Artista> artistas;
 
-    public Concierto(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado, String tipoEvento, TipoEntrada tipoEntrada, List<String> artistas, List<String> bandas) {
-        super(idEvento, nombre, fechaInicio, duracionEstimada, cupo, estado, tipoEvento); // Llama al constructor de Evento
+    public Concierto(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado) {
+        super(idEvento, nombre, fechaInicio, duracionEstimada, cupo, estado);
         this.tipoEntrada = tipoEntrada;
         this.artistas = artistas;
-        this.bandas = bandas;
     }
 
+    public Concierto(){
+        super();
+    }
+        
     public TipoEntrada getTipoEntrada() {
         return tipoEntrada;
     }
@@ -27,11 +31,11 @@ public class Concierto extends Evento{
         this.tipoEntrada = tipoEntrada;
     }
 
-    public List<String> getArtistas() {
+    public List<Artista> getArtistas() {
         return artistas;
     }
 
-    public void setArtistas(List<String> artistas) {
+    public void setArtistas(List<Artista> artistas) {
         this.artistas = artistas;
     }
 
@@ -54,8 +58,7 @@ public class Concierto extends Evento{
                 ", estado='" + getEstado() + '\'' +
                 ", tipoEvento='" + getTipoEvento() + '\'' +
                 ", tipoEntrada=" + tipoEntrada +
-                ", artistas=" + artistas +
-                ", bandas=" + bandas +
+                ", artistas=" + artistas.toString() +
                 '}';
     }
 }

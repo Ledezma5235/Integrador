@@ -1,10 +1,12 @@
 package main.java.com.integrador.modelo;
-import com.integrador.modelo.Persona;
+import java.time.LocalDate;
 
+import com.integrador.modelo.Persona;
+@Entity
 public class Organizador extends Persona {
 
-    public Organizador() {
-        super();
+    public Organizador(int dni,String nombre, LocalDate fechaNac, int telefono, String correoElectronico) {
+        super(dni, nombre, fechaNac, telefono, correoElectronico);
     }
 
     public void asignarRol(String rol, Asistente unAsistente) {

@@ -1,24 +1,30 @@
 package main.java.com.integrador.modelo;
 import java.util.Date;
-
+@Entity
 public abstract class Evento {
-    private int idEvento;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_evento")
+    private Long idEvento;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "fecha_inicio")
     private Date fechaInicio;
+    @Column(name = "duracion_estimada")
     private Integer duracionEstimada;
+    @Column(name = "cupo")
     private Integer cupo;
+    @Column(name = "estado")
     private String estado;
-    private String tipoEvento;
 
     // Constructor
-    public Evento(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado, String tipoEvento) {
+    public Evento(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado) {
         this.idEvento = idEvento;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.duracionEstimada = duracionEstimada;
         this.cupo = cupo;
         this.estado = estado;
-        this.tipoEvento = tipoEvento;
     }
 
     // Getters and Setters
@@ -88,7 +94,6 @@ public abstract class Evento {
                 ", duracionEstimada=" + duracionEstimada +
                 ", cupo=" + cupo +
                 ", estado='" + estado + '\'' +
-                ", tipoEvento='" + tipoEvento + '\'' +
                 '}';
     }
 }

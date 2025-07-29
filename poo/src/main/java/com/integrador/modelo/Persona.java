@@ -1,17 +1,25 @@
 package main.java.com.integrador.modelo;
 import java.time.LocalDate;
-
+import javax.persistence.*;
+@Entity
+@Ineritance(strategy = InheritanceType.JOINED)
 public abstract class Persona {
-
-    private String nombre;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "dni", nullable = false, unique = true)
     private int dni;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
+    @Column(name = "fecha_nac", nullable = true)
     private LocalDate fechaNac;
+    @Column(name = "telefono", nullable = true)
     private int telefono;
+    @Column(name = "correo_electronico", nullable = true)
     private String correoElectronico;
 
-    public Persona (String nombre, int dni, LocalDate fechaNac, int telefono, String correoElectronico){
-        this.nombre = nombre;
+    public Persona (int dni,String nombre, LocalDate fechaNac, int telefono, String correoElectronico){
         this.dni = dni;
+        this.nombre = nombre;
         this.fechaNac = fechaNac;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
