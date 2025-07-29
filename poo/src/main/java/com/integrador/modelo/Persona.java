@@ -47,5 +47,4 @@ public abstract class Persona {
     public String toString(){
         return "Persona [nombre=" + nombre + ", dni=" + dni + ", fechaNac=" + fechaNac + ", telefono=" + telefono + ", correoElectronico=" + correoElectronico + "]";
     }
-
 }
