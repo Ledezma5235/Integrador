@@ -1,5 +1,6 @@
 package main.java.com.integrador.modelo;
 import java.util.Date;
+import java.util.List;
 @Entity
 public abstract class Evento {
     @Id
@@ -17,14 +18,37 @@ public abstract class Evento {
     @Column(name = "estado")
     private String estado;
 
+    @ManyToMany
+    @JoinTable(name = "evento_asistente",
+            joinColumns = @JoinColumn(name = "idEvento"),
+            inverseJoinColumns = @JoinColumn(name = "dni"))
+    private List<Asistente> asistentes;
+    @ManyToOne
+    @JoinColumn(name = "dni_organizador")
+    private Organizador organizador;
+
+    @ManyToMany
+    @JoinTable(name = "participantes",
+            joinColumns = @JoinColumn(name = "idEvento"),
+            inverseJoinColumns = @JoinColumn(name = "dni"))
+    private List<Participante> participantes;
+
+    public Evento() {
+        // Constructor vacio para JPA
+    }
+
     // Constructor
-    public Evento(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado) {
+    public Evento(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado, List<Asistente> asistentes, Organizador organizador, List<Participante> participantes) {
         this.idEvento = idEvento;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.duracionEstimada = duracionEstimada;
         this.cupo = cupo;
         this.estado = estado;
+        this.asistentes = asistentes;
+        this.organizador = organizador;
+        this.participantes = participantes;
+         
     }
 
     // Getters and Setters

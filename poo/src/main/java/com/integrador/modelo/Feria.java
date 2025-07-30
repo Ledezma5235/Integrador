@@ -9,6 +9,7 @@ public class Feria extends Evento {
     @Column(name = "tipo_ubicacion")
     private String tipoUbicacion;
     @OneToMany(mappedBy = "feria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "stands")
     private List<Stands> stands;
     
     // Constructor

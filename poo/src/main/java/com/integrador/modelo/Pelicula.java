@@ -1,4 +1,7 @@
 package main.java.com.integrador.modelo;
+
+import java.util.List;
+
 @Entity
 public class Pelicula {
     @Column(name = "titulo")
@@ -10,19 +13,23 @@ public class Pelicula {
     @Column(name = "genero")
     private Boolean genero;
     
-    @ManyToOne
-    @joinColumn(name = "id_Evento", nullable = false)
+    @ManyToMany(mappedBy = "peliculas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "ciclo_cine_pelicula",
+            joinColumns = @JoinColumn(name = "pelicula_id"),
+            inverseJoinColumns = @JoinColumn(name = "ciclo_cine_id"))
+    private List<CicloCine> ciclosCine;
 
     // Constructor vacío
     public Pelicula() {
     }
 
     // Constructor con parámetros
-    public Pelicula(String titulo, String director, int duracion, Boolean genero) {
+    public Pelicula(String titulo, String director, int duracion, Boolean genero,List<CicloCine> ciclosCine) {
         this.titulo = titulo;
         this.director = director;
         this.duracion = duracion;
         this.genero = genero;
+        this.ciclosCine = ciclosCine;
     }
 
     // Getters y Setters

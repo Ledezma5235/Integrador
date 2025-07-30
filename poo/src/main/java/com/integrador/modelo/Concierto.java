@@ -3,17 +3,20 @@ import java.util.List;
 import main.java.com.integrador.modelo.Evento;
 @Entity
 public class Concierto extends Evento{
-    @Column(name = "concierto")
     public enum TipoEntrada {
         GRATUITO,
         PAGA
     }
     @Column(name = "tipo_entrada")
     private TipoEntrada tipoEntrada;
-    @OneToMany(mappedBy = "concierto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(name = "concierto_artista",
+            joinColumns = @JoinColumn(name = "concierto_id"),
+            inverseJoinColumns = @JoinColumn(name = "artista_id"))
     private List<Artista> artistas;
 
-    public Concierto(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado) {
+
+    public Concierto(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado, List<Artista> artistas, TipoEntrada tipoEntrada) {
         super(idEvento, nombre, fechaInicio, duracionEstimada, cupo, estado);
         this.tipoEntrada = tipoEntrada;
         this.artistas = artistas;

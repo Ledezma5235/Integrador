@@ -10,9 +10,11 @@ public class CicloCine extends Evento {
     private Integer orden;
     @Column(name = "hay_charla")
     private Boolean hayCharla;
-    @OneToMany(mappedBy = "cicloCine", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "ciclo_cine_pelicula",
+            joinColumns = @JoinColumn(name = "ciclo_cine_id"),
+            inverseJoinColumns = @JoinColumn(name = "pelicula_id"))
     private List<Pelicula> peliculas;
-
     // Constructor
     public CicloCine(int idEvento, String nombre, Date fechaInicio, Integer duracionEstimada, Integer cupo, String estado, String tipoEvento, Integer orden, List<Pelicula> peliculas, Boolean hayCharla) {
         super(idEvento, nombre, fechaInicio, duracionEstimada, cupo, estado, tipoEvento); // Llama al constructor de Evento

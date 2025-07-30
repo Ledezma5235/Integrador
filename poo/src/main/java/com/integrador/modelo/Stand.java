@@ -7,7 +7,7 @@ public class Stand {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "stand", nullable = false)
+    @JoinColumn(name = "stands", nullable = false)
     private Feria feria;
 
     // Constructor

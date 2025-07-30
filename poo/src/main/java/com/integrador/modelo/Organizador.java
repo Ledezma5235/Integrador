@@ -5,8 +5,15 @@ import com.integrador.modelo.Persona;
 @Entity
 public class Organizador extends Persona {
 
-    public Organizador(int dni,String nombre, LocalDate fechaNac, int telefono, String correoElectronico) {
+    @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "eventos")
+    private List<Evento> eventos;
+
+    public Organizador(){}
+
+    public Organizador(int dni,String nombre, LocalDate fechaNac, int telefono, String correoElectronico,Evento evento) {
         super(dni, nombre, fechaNac, telefono, correoElectronico);
+        this.eventos = new ArrayList<>();
     }
 
     public void asignarRol(String rol, Asistente unAsistente) {

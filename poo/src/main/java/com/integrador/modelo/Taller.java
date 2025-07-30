@@ -8,7 +8,10 @@ public class Taller extends Evento {
     private Integer cupoMaximo;
     @Column(name = "modalidad")
     private String modalidad;
-    @OneToMany(mappedBy = "taller", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "talleres", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "taller_instructor",
+            joinColumns = @JoinColumn(name = "taller_id"),
+            inverseJoinColumns = @JoinColumn(name = "instructor_id"))
     @Column(name = "instructores")
     private List<Instructor> instructores;
     

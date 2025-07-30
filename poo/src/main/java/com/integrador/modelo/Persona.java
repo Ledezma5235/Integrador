@@ -17,6 +17,10 @@ public abstract class Persona {
     @Column(name = "correo_electronico", nullable = true)
     private String correoElectronico;
 
+    public Persona() {
+        // Default constructor
+    }
+
     public Persona (int dni,String nombre, LocalDate fechaNac, int telefono, String correoElectronico){
         this.dni = dni;
         this.nombre = nombre;
